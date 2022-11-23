@@ -1,24 +1,12 @@
 const express = require('express')
+const bodyParser = require('body-parser')
+const v1ConsumeRouter = require('./v1/routes/consumeRoutes')
 
 const app = express()
 const port = process.env.PORT || 3000
 
-app.get('/', (req, res) => {
-  // res.json({ mensaje: 'Hello World!'})
-  res.send("<h2>It's Working!</h2>")
-})
-
-app.get('/cervezas', function(req, res) {
-  res.json({ mensaje: '¡A beber cerveza!' })  
-})
-
-app.post('/', function(req, res) {
-  res.json({ mensaje: 'Método post' })   
-})
-
-app.del('/', function(req, res) {
-  res.json({ mensaje: 'Método delete' })  
-})
+app.use(bodyParser.json())
+app.use('/api/v1/consume', v1ConsumeRouter)
 
 // iniciamos nuestro servidor
 app.listen(port, () => {
